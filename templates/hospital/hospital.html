@@ -1,0 +1,127 @@
+{% include 'index.html'%}
+{% block content %}
+<style>
+    .banner{
+        background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.25)),url(../static/img/hospital/bg.jpeg);
+       background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    .search{
+        --padding:14px;
+        width: max-content;
+        display: flex;
+        align-items: center;
+        border-radius: 28px;
+        border: 5px solid white;
+        background:transparent;
+        padding: var(--padding);
+    }
+    .search-input{
+        font-size: 16px;
+        font-family: 'lexend',sans-serif;
+        color: #f6f6f6;
+        margin-left: var(--padding);
+        outline: none;
+        background: transparent;
+        border: none;
+        width: 300px;
+        text-shadow: yellowgreen;
+    }
+    .search-input::placeholder{
+        color: #f6f6f6;
+    }
+    .tagline{
+        font-size: 40px;
+        color: #f6f6f6;
+    }
+    #image{
+        flex: 2;
+        filter: grayscale(100%);
+        
+    }
+    #image:hover{
+        filter: grayscale(0%);
+    }
+    #content{
+        flex: 3;
+    }
+    #button{
+        flex:1;
+    }
+    .cards{
+        transform: 1.5s;
+        display: block;
+        display: flex;
+        
+        align-items: stretch;
+        
+    }
+    .cards:hover{
+        transform: scale(1.03);
+        z-index: 100;
+    }
+    .card{
+        display: block;
+    }   
+</style>
+{% include 'header.html'%}
+<div class="banner align-items-center d-flex justify-content-center flex-column" style="height: 400px;">
+    <div class="tagline">
+        <span>“We are here to hear and heal your health problems.”</span>
+    </div>
+
+    <div class="  ">
+    <div class="search">
+        <i class="bi bi-search search-icon text-light"></i>
+        <input class="search-input" type="search" name="" id="" placeholder="Search here...">
+
+    </div>
+    </div>
+
+</div>
+
+<!-- now making the section for cards -->
+<section class="mb-5">
+    
+    <div class="d-flex justify-content-center mt-4">
+        <h1 class="text-danger">It is not only about the money.</h1>
+    </div>
+    <div class="d-flex  flex-wrap  gap-4 justify-content-center  mx-4 mt-4 mb-4">
+      {% for Hospital in hospital %}
+        <div class=" cards ">
+            <div class=" card d-flex   mt-2" style="width: 350px;">
+                <div id="image" >
+                  <img src="{{Hospital.Image.url}}" alt="" width="350px" height="200px">
+              </div>
+              <div class="px-2 pt-2 pb-2" id="content">
+                <div>
+                  
+                    <i class="bi bi-star-fill text-warning" style="padding-left: 5px;"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star"></i>
+                    <span>{{Hospital.Rating}} Ratings</span>
+          
+                  </div>
+                <h5>{{Hospital.Name}}</h5>
+                <i class="bi bi-geo-alt-fill text-info"></i><span class="fs-6 px-1">{{Hospital.Address}}</span>
+                
+                
+              </div>
+              <div class="d-flex justify-content-center mx-3 gap-2 mt-2 buttons mb-2 " id="button" >
+                <a href="{{Hospital.Location}}" target="_blank">
+                    <button class="btn btn-primary " style="width:170px" >VISIT LOCATION</button>
+                </a>
+                <button class="btn btn-warning " style="width:170px">VIEW MORE</button>
+            </div>
+              </div>
+        </div>
+    {% endfor%}
+    </div>
+
+</section>
+
+{% include 'footer.html'%}
+{% endblock%}

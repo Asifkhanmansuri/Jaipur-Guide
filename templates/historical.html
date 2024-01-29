@@ -1,0 +1,143 @@
+{% include 'index.html'%}
+{% block content %}
+<style>
+    .banner{
+        background-image: linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25)),url(../static/img/jalmahal.jpeg);
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .search{
+        --padding:14px;
+        width: max-content;
+        display: flex;
+        align-items: center;
+        border-radius: 28px;
+        border: 5px solid white;
+        background:transparent;
+        padding: var(--padding);
+    }
+    .search-input{
+        font-size: 16px;
+        font-family: 'lexend',sans-serif;
+        color: #f6f6f6;
+        margin-left: var(--padding);
+        outline: none;
+        background: transparent;
+        border: none;
+        width: 300px;
+        text-shadow: yellowgreen;
+    }
+    .search-input::placeholder{
+        color: #f6f6f6;
+    }
+    .tagline{
+        font-size: 40px;
+        color: #f6f6f6;
+    }
+    section div h2{
+        color: #f37022;
+    }
+    .place_name{
+        box-shadow: 2px 2px 2px 2px   #f37022;
+    }
+    #image{
+        flex: 2;
+        filter: grayscale(100%);
+        
+    }
+    #image:hover{
+        filter: grayscale(0%);
+    }
+    #content{
+        flex: 3;
+    }
+    #button{
+        flex:1;
+    }
+    .cards{
+        transform: 1.5s;
+        display: block;
+        overflow: hidden;
+    }
+    .cards:hover{
+        transform: scale(1.03);
+        z-index: 100;
+    }
+    .card{
+        display: block;
+    }
+
+</style>
+{% include 'header.html'%}
+<div class="banner align-items-center d-flex justify-content-center flex-column" style="height: 400px;">
+    <div class="tagline">
+        <span>“Experience the grandeur of Jaipur’s royal past at its historical palaces.”</span>
+    </div>
+
+    <div class="  ">
+    <div class="search">
+        <i class="bi bi-search search-icon text-light"></i>
+        <input class="search-input" type="search" name="" id="" placeholder="Search here...">
+
+    </div>
+    </div>
+
+</div>
+
+<section class=" d-flex justify-content-center mt-3 mb-5 ">
+    <div class="border px-5 pt-3 pb-4 rounded-4  place_name " style="width:1200px">
+        <h2 class="">Famous Historical Places in Jaipur</h2>
+       <marquee behavior="" direction="left"> <span class="fs-5">Amber Fort, Jaigarh, Nahargarh, JalMahal, Hawamahal, Jantar Mantar, Albert Hall, Swai Man Singh Statue, 
+             Amer Jawan Jyoti, City Palace, Sysodia Rani ka Bagh, 
+            Gatore Ki Chhtriyan 
+          </span></marquee>
+    </div>
+</section>
+
+
+
+
+<!-- now making the section for cards -->
+<section class="mb-5">
+    
+      <div class="d-flex justify-content-center mt-4">
+          <h1 class="text-danger">HISTORICAL PALACE</h1>
+      </div>
+      <div class="d-flex flex-wrap gap-4 justify-content-center  mx-4 mt-4 mb-4">
+        {% for Historical_Data in historical_data %}
+      <div class="card d-flex border cards mt-2" style="width: 350px;">
+        <div id="image" >
+          <img src="{{Historical_Data.Image.url}}" alt="" width="350px" height="200px">
+      </div>
+      <div class="px-2 pt-2 pb-2" id="content">
+        <div>
+          
+            <i class="bi bi-star-fill text-warning" style="padding-left: 5px;"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star"></i>
+            <span>{{Historical_Data.Rating}} Ratings</span>
+  
+          </div>
+        <h5>{{Historical_Data.Name}}</h5>
+        <i class="bi bi-geo-alt-fill text-info"></i><span class="fs-6 px-1">{{Historical_Data.Address}}</span>
+        
+        
+      </div>
+      <div class="d-flex justify-content-center  mx-3 gap-2 mt-2 mb-2 " id="button" >
+        <a href="{{Historical_Data.Location}}" target="_blank">
+            <button class="btn btn-primary " style="width:170px" >VISIT LOCATION</button>
+        </a>
+        <a href="{% url 'place_details' Historical_Data.id %}">
+            <button class="btn btn-warning " style="width:170px">VIEW MORE</button>
+        </a>
+    </div>
+      </div>
+      {% endfor%}
+      </div>
+ 
+  </section>
+   
+{% include 'footer.html' %}
+{% endblock %}

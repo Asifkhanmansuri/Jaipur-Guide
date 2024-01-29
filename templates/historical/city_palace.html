@@ -1,0 +1,47 @@
+{% include 'index.html'%}
+{% block content %}
+
+{% include 'header.html'%}
+<div class="d-flex justify-content-center px-5 ">
+   
+  <div style="width: 1000px;">
+        <div class="d-flex justify-content-center">
+                <img src="{{viewmore.Image.url}}" alt="" width="1000PX" height="500px"> 
+          </div>
+          <div class="d-flex justify-content-center mt-4 fs-1">
+                <h1>{{viewmore.Place_Name}}</h1>
+          </div>
+          <div class="mt-2 fs-5">
+                <p>{{viewmore.Wikipedia}}</p>
+                <span class="d-flex justify-content-end ">
+                  
+                  <a href="{{viewmore.Wikipedia_Link}}" target="_blank">Read More</a>
+            </span>
+          </div>
+          <div class="d-flex justify-content-center pt-4">
+                <h2>{{viewmore.Section_Name}}</h2>
+          </div>
+          <div class="d-flex gap-4 flex-wrap mb-4 pt-3">
+                {% for image in placeImage%}
+          <div class=" justify-content-center ">
+                <img class="rounded" src="{{image.Section_Image.url}}" alt="" width="300px" height="280px">
+          </div>
+          {% endfor%}
+          </div>
+  </div>
+        
+        
+        
+
+        
+       
+        
+        
+        
+
+
+    
+</div>
+
+{% include 'footer.html'%}
+{% endblock %}
